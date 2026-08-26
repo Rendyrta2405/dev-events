@@ -271,3 +271,8 @@
     }
   }
 }
+
+img {
+  width: auto;
+  height: auto;
+}
