@@ -32,7 +32,9 @@ const EventTags = ({ tags }: { tags: string[] }) => (
     </div>
 )
 
-const EventDetails = async ({ params }: { params: Promise<string> }) => {
+const EventDetails = async (
+   { params }: { params: Promise<{ slug: string }> }
+) => {
    const { slug } = await params;
 
    const request = await fetch(`${BASE_URL}/api/events/${slug}`);
@@ -50,8 +52,6 @@ const EventDetails = async ({ params }: { params: Promise<string> }) => {
    const bookings = 10;
    
    const similarEvents: IEvent[] = await getSimilarEventsBySlug(slug);
-
-   console.log(similarEvents)
 
     return (
         <section id="event">
@@ -102,7 +102,10 @@ const EventDetails = async ({ params }: { params: Promise<string> }) => {
                             <p className="text-sm">Be the first to book your spot!</p>
                         )}
 
-                        <BookEvent eventId={event._id} slug={event.slug} />
+                        <BookEvent 
+                           eventId={event._id} 
+                           slug={event.slug} 
+                        />
                     </div>
                 </aside>
             </div>

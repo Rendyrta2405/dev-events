@@ -8,12 +8,30 @@ const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 const Page = async () => {
     'use cache';
     cacheLife('hours');
-    const response = await fetch(`${BASE_URL}/api/events`);
-    const { events } = await response.json();
+
+   let events: IEvent[] = [];
+   
+   try {
+       const response = await fetch(`${BASE_URL}/api/events`);
+      
+       if (!response.ok) {
+          throw new Error(`Server returned status: ${response.status}`);
+       }
+
+      const data = await response.json();
+      
+      events = data?.events || [];
+   } catch (error) {
+       console.error('Error fetching events:', error.message);
+    
+       return []; 
+   }
+
+   
 
     return (
         <section>
-            <h1 className="text-center">The Hub for Every Dev <br /> Event You Can't Miss</h1>
++            <h1 className="text-center">The Hub for Every Dev <br /> Event You Can&apos;t Miss</h1>
             <p className="text-center mt-5">Hackathons, Meetups, and Conferences, All in One Place</p>
 
             <ExploreBtn />
