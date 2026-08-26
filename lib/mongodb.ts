@@ -17,7 +17,7 @@ const cached: MongooseCache = globalThis.__mongoose ?? {
 
 globalThis.__mongoose = cached;
 
-export async function connectToDatabase(): Promise<Mongoose> {
+async function connectToDatabase(): Promise<Mongoose> {
   const uri = process.env.MONGODB_URI;
 
   if (!uri) {

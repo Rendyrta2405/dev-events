@@ -1,7 +1,7 @@
 import ExploreBtn from "@/components/ExploreBtn";
 import EventCard from "@/components/EventCard";
 import {IEvent} from "@/database";
-import {cacheLife} from "next/cache"
+import {cacheLife} from "next/cache";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
@@ -27,8 +27,6 @@ const Page = async () => {
        return []; 
    }
 
-   
-
     return (
         <section>
 +            <h1 className="text-center">The Hub for Every Dev <br /> Event You Can&apos;t Miss</h1>
@@ -40,12 +38,16 @@ const Page = async () => {
                 <h3>Featured Events</h3>
 
                <ul className="events">
-                    {events && events.length > 0 && 
+                    {events && events.length > 0 ?
                        events.map((event: IEvent) => (
                         <li key={event.title} className="list-none">
                             <EventCard {...event} />
                         </li>
-                    ))}
+                    )) : (
+                       <div>
+                          There are no upcoming events yet.
+                       </div>
+                    )}
                 </ul>
             </div>
         </section>
